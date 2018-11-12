@@ -45,7 +45,11 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "dependencies": {},
+  "dependencies": {
+    "history": "4.7.2",
+    "invariant": "^2.2.4",
+    "warning": "^3.0.0"
+  },
   "devDependencies": {
     "@w33ble/npm-auto-tools": "*",
     "eslint": "^4.9.0",
