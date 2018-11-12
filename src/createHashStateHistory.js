@@ -1,6 +1,4 @@
 /* eslint no-use-before-define: 0 */
-import warning from 'warning';
-import invariant from 'invariant';
 import { createLocation, locationsAreEqual } from 'history/LocationUtils';
 import {
   addLeadingSlash,
@@ -17,9 +15,31 @@ import {
   removeEventListener,
   getConfirmation,
   supportsGoWithoutReloadUsingHash,
+  supportsHistory,
 } from 'history/DOMUtils';
 
+function warning(condition, message) {
+  if (condition) return;
+  // eslint-disable-next-line no-console
+  console.warn(message);
+}
+
+function invariant(condition, message) {
+  if (condition) return;
+  throw new Error(`Invariant failed: ${message || ''}`);
+}
+
 const HashChangeEvent = 'hashchange';
+
+const getHistoryState = () => {
+  try {
+    return window.history.state || {};
+  } catch (e) {
+    // IE 11 sometimes throws when accessing window.history.state
+    // See https://github.com/ReactTraining/history/pull/289
+    return {};
+  }
+};
 
 const HashPathCoders = {
   hashbang: {
@@ -56,18 +76,21 @@ const replaceHashPath = path => {
   );
 };
 
-const createHashHistory = (props = {}) => {
+const createHashStateHistory = (props = {}) => {
   invariant(canUseDOM, 'Hash history needs a DOM');
 
   const globalHistory = window.history;
   const canGoWithoutReload = supportsGoWithoutReloadUsingHash();
+  const canUseHistory = supportsHistory();
 
-  const { getUserConfirmation = getConfirmation, hashType = 'slash' } = props;
+  const { getUserConfirmation = getConfirmation, hashType = 'slash', keyLength = 6 } = props;
+
   const basename = props.basename ? stripTrailingSlash(addLeadingSlash(props.basename)) : '';
 
   const { encodePath, decodePath } = HashPathCoders[hashType];
 
   const getDOMLocation = () => {
+    const { key, state } = getHistoryState();
     let path = decodePath(getHashPath());
 
     warning(
@@ -78,8 +101,13 @@ const createHashHistory = (props = {}) => {
 
     if (basename) path = stripBasename(path, basename);
 
-    return createLocation(path);
+    return createLocation(path, state, key);
   };
+
+  const createKey = () =>
+    Math.random()
+      .toString(36)
+      .substr(2, keyLength);
 
   const transitionManager = createTransitionManager();
 
@@ -170,10 +198,8 @@ const createHashHistory = (props = {}) => {
 
   // eslint-disable-next-line no-shadow
   const push = (path, state) => {
-    warning(state === undefined, 'Hash history cannot push state; it is ignored');
-
     const action = 'PUSH';
-    const location = createLocation(path, undefined, undefined, history.location);
+    const location = createLocation(path, state, createKey(), history.location);
 
     transitionManager.confirmTransitionTo(location, action, getUserConfirmation, ok => {
       if (!ok) return;
@@ -189,7 +215,19 @@ const createHashHistory = (props = {}) => {
         // rather setState here and ignore the hashchange. The caveat here
         // is that other hash histories in the page will consider it a POP.
         ignorePath = path;
-        pushHashPath(encodedPath);
+
+        if (canUseHistory) {
+          // eslint-disable-next-line no-shadow
+          const { key, state } = location;
+          const href = createHref(location);
+          globalHistory.pushState({ key, state }, null, href);
+        } else {
+          warning(
+            state === undefined,
+            'Browser history cannot push state in browsers that do not support HTML5 history, state is ignored'
+          );
+          pushHashPath(encodedPath);
+        }
 
         const prevIndex = allPaths.lastIndexOf(createPath(history.location));
         const nextPaths = allPaths.slice(0, prevIndex === -1 ? 0 : prevIndex + 1);
@@ -310,4 +348,4 @@ const createHashHistory = (props = {}) => {
   return history;
 };
 
-export default createHashHistory;
+export default createHashStateHistory;
