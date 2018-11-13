@@ -28,7 +28,7 @@
   },
   "overrides": [
     {
-      "files": ["src/**/*.{js,mjs}"],
+      "files": ["src/**/*.{js,mjs}", "test/**/*.{js,mjs}"],
       "env": {
         "browser": true,
         "node": false

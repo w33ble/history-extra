@@ -7,7 +7,9 @@
     "lint": "eslint '*.{js,mjs}' 'src/**/*.{js,mjs}'",
     "precommit": "lint-staged",
     "version": "npm-auto-version",
-    "start": "node ."
+    "start": "node .",
+    "test": "karma start karma.conf.js",
+    "test:dev": "DEV=1 karma start karma.conf.js"
   },
   "repository": {
     "type": "git",
@@ -46,10 +48,13 @@
     "trailingComma": "es5"
   },
   "dependencies": {
-    "history": "^4.7.2"
+    "history": "^4.7.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.5",
+    "@babel/preset-env": "^7.1.5",
     "@w33ble/npm-auto-tools": "*",
+    "dotenv": "^6.1.0",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
@@ -58,7 +63,21 @@
     "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-react": "^7.1.0",
     "husky": "^0.14.3",
+    "karma": "^2.0.5",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage-istanbul-reporter": "^2.0.4",
+    "karma-rollup-preprocessor": "^6.1.0",
+    "karma-sauce-launcher": "^1.2.0",
+    "karma-tap": "^4.1.4",
     "lint-staged": "^7.0.4",
-    "prettier": "^1.9.0"
+    "prettier": "^1.9.0",
+    "rollup": "^0.66.6",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-istanbul": "^2.0.1",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.4.0",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "tape-rollup": "^4.6.4"
   }
 }

@@ -8,4 +8,5 @@ yarn-error.log
 coverage
 .nyc_output
 coverage.lcov
-/lib
+/dist
+/coverage
