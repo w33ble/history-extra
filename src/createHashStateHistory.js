@@ -249,10 +249,8 @@ const createHashStateHistory = (props = {}) => {
 
   // eslint-disable-next-line no-shadow
   const replace = (path, state) => {
-    warning(state === undefined, 'Hash history cannot replace state; it is ignored');
-
     const action = 'REPLACE';
-    const location = createLocation(path, undefined, undefined, history.location);
+    const location = createLocation(path, state, createKey(), history.location);
 
     transitionManager.confirmTransitionTo(location, action, getUserConfirmation, ok => {
       if (!ok) return;
@@ -268,7 +266,19 @@ const createHashStateHistory = (props = {}) => {
         // rather setState here and ignore the hashchange. The caveat here
         // is that other hash histories in the page will consider it a POP.
         ignorePath = path;
-        replaceHashPath(encodedPath);
+
+        if (canUseHistory) {
+          // eslint-disable-next-line no-shadow
+          const { key, state } = location;
+          const href = createHref(location);
+          globalHistory.replaceState({ key, state }, null, href);
+        } else {
+          warning(
+            state === undefined,
+            'Browser history cannot push state in browsers that do not support HTML5 history, state is ignored'
+          );
+          replaceHashPath(encodedPath);
+        }
       }
 
       const prevIndex = allPaths.indexOf(createPath(history.location));
