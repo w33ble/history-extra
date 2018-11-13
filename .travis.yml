@@ -5,8 +5,12 @@ node_js:
   - "8"
 
 cache:
+  yarn: true
   directories:
     - node_modules
+
+env:
+  - TRAVIS=1
 
 notifications:
   email:
