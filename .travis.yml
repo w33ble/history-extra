@@ -20,6 +20,7 @@ branches:
     - /^v[0-9].*$/
 
 before_script:
+  - yarn run lint
   - yarn run build
 
 env:
