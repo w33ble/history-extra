@@ -1,22 +1,26 @@
 /* eslint no-use-before-define: 0 */
-import { createLocation, locationsAreEqual } from 'history/LocationUtils';
-import {
+import locationUtils from 'history/LocationUtils';
+import PathUtils from 'history/PathUtils';
+import createTransitionManager from 'history/createTransitionManager';
+import DOMUtils from 'history/DOMUtils';
+
+const { createLocation, locationsAreEqual } = locationUtils;
+const {
   addLeadingSlash,
   stripLeadingSlash,
   stripTrailingSlash,
   hasBasename,
   stripBasename,
   createPath,
-} from 'history/PathUtils';
-import createTransitionManager from 'history/createTransitionManager';
-import {
+} = PathUtils;
+const {
   canUseDOM,
   addEventListener,
   removeEventListener,
   getConfirmation,
   supportsGoWithoutReloadUsingHash,
   supportsHistory,
-} from 'history/DOMUtils';
+} = DOMUtils;
 
 function warning(condition, message) {
   if (condition) return;
