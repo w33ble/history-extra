@@ -1,6 +1,6 @@
 {
   "name": "history-extra",
-  "version": "0.0.0",
+  "version": "4.0.0",
   "description": "Extra functionality for the history module",
   "main": "dist/index.js",
   "scripts": {
