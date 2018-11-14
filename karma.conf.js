@@ -7,7 +7,7 @@ const launchers = process.env.KARMA_LAUNCHERS;
 
 module.exports = function karmaConfig(config) {
   const customLaunchers = {
-    SL_InternetExplorer: {
+    SL_Explorer: {
       base: 'SauceLabs',
       browserName: 'internet explorer',
       version: '11',
@@ -47,7 +47,8 @@ module.exports = function karmaConfig(config) {
     frameworks: ['tap'],
     files: ['test/index.js'],
     preprocessors: {
-      'test/**/*.{js,mjs}': ['rollup'],
+      'test/**.{js,mjs}': ['rollup'],
+      'src/**.{js,mjs}': ['rollup'],
     },
     autoWatch: isDev,
     singleRun: !isDev,
