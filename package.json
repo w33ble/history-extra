@@ -3,6 +3,7 @@
   "version": "4.0.0",
   "description": "Extra functionality for the history module",
   "main": "dist/createHashStateHistory.js",
+  "module": "dist/createHashStateHistory.mjs",
   "scripts": {
     "lint": "eslint '*.{js,mjs}' 'src/**/*.{js,mjs}'",
     "precommit": "lint-staged",
