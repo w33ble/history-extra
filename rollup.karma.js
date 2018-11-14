@@ -1,30 +1,17 @@
-require('dotenv').config();
-const babel = require('rollup-plugin-babel');
-const builtins = require('rollup-plugin-node-builtins');
-const commonjs = require('rollup-plugin-commonjs');
-const globals = require('rollup-plugin-node-globals');
 const istanbul = require('rollup-plugin-istanbul');
-const resolve = require('rollup-plugin-node-resolve');
+const config = require('./rollup.common');
 
 module.exports = {
+  ...config,
   output: {
     format: 'iife',
     name: 'history',
     sourcemap: 'inline',
   },
-  plugins: [
-    commonjs(),
-    globals(),
-    builtins(),
-    resolve({
-      browser: true,
-      jsnext: true,
-    }),
+  plugins: config.plugins.slice(0, -1).concat([
     istanbul({
-      include: ['./src/**/*.{js,mjs}'],
+      exclude: ['test/**/*.js', 'node_modules/**'],
     }),
-    babel({
-      exclude: ['node_modules/**'],
-    }),
-  ],
+    config.plugins.slice(-1),
+  ]),
 };

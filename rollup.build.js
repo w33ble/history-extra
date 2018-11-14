@@ -1,10 +1,5 @@
-require('dotenv').config();
 const fs = require('fs');
-const babel = require('rollup-plugin-babel');
-const builtins = require('rollup-plugin-node-builtins');
-const commonjs = require('rollup-plugin-commonjs');
-const globals = require('rollup-plugin-node-globals');
-const resolve = require('rollup-plugin-node-resolve');
+const config = require('./rollup.common');
 const pkg = require('./package.json');
 
 const license = fs.readFileSync('./LICENSE', 'utf-8').replace(/\n/g, '\n* ');
@@ -17,6 +12,7 @@ const banner = `/*
 `;
 
 module.exports = {
+  ...config,
   input: 'src/createHashStateHistory.js',
   output: [
     {
@@ -42,16 +38,4 @@ module.exports = {
     },
   ],
   external: id => /history/.test(id),
-  plugins: [
-    commonjs(),
-    globals(),
-    builtins(),
-    resolve({
-      browser: true,
-      jsnext: true,
-    }),
-    babel({
-      exclude: ['node_modules/**'],
-    }),
-  ],
 };
