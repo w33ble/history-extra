@@ -1,1 +1,3 @@
-import './createHashStateHistory';
+import './setup';
+import './pushState';
+import './replaceState';

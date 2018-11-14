@@ -33,6 +33,12 @@
         "browser": true,
         "node": false
       }
+    },
+    {
+      "files": ["src/**/*.{js,mjs}"],
+      "rules": {
+        "import/no-extraneous-dependencies": ["error", { "peerDependencies": true }]
+      }
     }
   ]
 }

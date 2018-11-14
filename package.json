@@ -47,7 +47,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "dependencies": {
+  "peerDependencies": {
     "history": "^4.7.0"
   },
   "devDependencies": {
@@ -62,6 +62,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-react": "^7.1.0",
+    "history": "^4.7.0",
     "husky": "^0.14.3",
     "karma": "^2.0.5",
     "karma-chrome-launcher": "^2.2.0",
@@ -79,5 +80,6 @@
     "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-node-resolve": "^3.4.0",
     "tape-rollup": "^4.6.4"
-  }
+  },
+  "dependencies": {}
 }
