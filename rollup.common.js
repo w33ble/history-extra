@@ -1,5 +1,4 @@
 require('dotenv').config();
-const babel = require('rollup-plugin-babel');
 const builtins = require('rollup-plugin-node-builtins');
 const commonjs = require('rollup-plugin-commonjs');
 const globals = require('rollup-plugin-node-globals');
@@ -14,9 +13,6 @@ module.exports = {
       browser: true,
       jsnext: true,
       module: true,
-    }),
-    babel({
-      exclude: ['node_modules/**'],
     }),
   ],
 };

@@ -1,4 +1,5 @@
 const istanbul = require('rollup-plugin-istanbul');
+const babel = require('rollup-plugin-babel');
 const config = require('./rollup.common');
 
 module.exports = {
@@ -8,10 +9,10 @@ module.exports = {
     name: 'history',
     sourcemap: 'inline',
   },
-  plugins: config.plugins.slice(0, -1).concat([
+  plugins: config.plugins.concat([
     istanbul({
       exclude: ['test/**/*.js', 'node_modules/**'],
     }),
-    config.plugins.slice(-1),
+    babel(),
   ]),
 };

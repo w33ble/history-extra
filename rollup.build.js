@@ -1,4 +1,5 @@
 const fs = require('fs');
+const babel = require('rollup-plugin-babel');
 const config = require('./rollup.common');
 const pkg = require('./package.json');
 
@@ -38,4 +39,9 @@ module.exports = {
     },
   ],
   external: id => /history/.test(id),
+  plugins: config.plugins.concat([
+    babel({
+      exclude: ['node_modules/**'],
+    }),
+  ]),
 };
