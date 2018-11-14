@@ -9,9 +9,6 @@ cache:
   directories:
     - node_modules
 
-env:
-  - TRAVIS=1
-
 notifications:
   email:
     on_success: never
@@ -22,3 +19,11 @@ branches:
     - master
     - /^v[0-9].*$/
 
+before_script:
+  - yarn run build
+
+env:
+  global:
+    - TRAVIS=1
+    - secure: "ni7X0bzBhn/4AXUWNjl+jUS+XY0nsDZMz3vaP1wUfs49dPu6Vx2yJU1yyXZNNwtiq6FtK9p4vg+49IpVcMbXlSq26Y738+v4wLrbPH4RWJV9QvILQRTc1vTqMSdMAzlLSj0dDey+39K/3V4ohMinjiKSSgxxDBf8frBHQ0LvwV+Qo8j8feHj73kxfWioa5wjBVFQo6fJpiTaylfceqWjF+Yh3zS5bJt/OyvPHdDiUIsneh3rcchxxpihAgKJn9qCYK5VF62OQaW3kY92Z0R3n0R0jYJ35T5hVGEXDp03Hy+QmI83UbWDHrWDv8uitwVTYsD3k4OgbtulXNKSC3L8QtPbP7OaT/MWPJOI+6HnVCTpK7RC2OMLIo7QCd2Mr0um0XeVM2tVO1S5Emd23X1ar+I2U+bWRLtFx1p4YHgEjOC76eXcUIcQBiPKRJ46KdBO53DSMhzYpWzq/XrbvZ1ENXu8XUa0HTOZPI4hgNHE26BNoOXTBXUtsFKyQAE/ril3xYj9XE43V8DONPggZmIs3Z68rYL5WlJi58hxDxCMxaD8KriGsQjRRz1QmxmcZTmhjEzfecR0ZTWSdiV0yvA8ME3AVyMzCa0mhZIdJU+5oIaomWbYVCF5fBfv6bO1moXg9YiafxoU5mxZ7sqkfqvBvA9zAjRjfOTpnzNmwtjlpXc="
+    - secure: "xogv0vTZMW8Z5fZ4eGkyMLaBM49gYefQljvWZM2AsqpsH/2b+dL9Iy9vXQYgtxYzD8y/KrdfVPzMwWg7gqjw+2D8FOJz1uq9qh+PiNhvnI4eOMvGMll9W5Q0RwvlS4ICBobJZqcbTUWWhnHwqFIRj54lMfjH8NT6GWCK4xm7t8Zjk97TAthjjcw1GGEP0CD+XvYBb0+fzhWeQiscjCFxc4aqimo8Vdlm9NyJujBZCPEUlb2mIrqtLoJH70VtGdS+oHUsEHm1tlIcKYbB+bF+pKiQNcAABQC0WxHoa1cuDG9Rp7iO9OG1QOqOqRFgPwtBs9fDz/mK94mUnmRcGV2yd1SKxouji8iJ9j8FYJIWseLToOmtGhsNsEbotLydJ5sCos/xEkgq2ArDmYSy3v4S5aDi94l+UqQJUYdlwYQ4JtCKjeWg9PmolPUcnfGYviJtnFl9vYRhphbX6hsAynsBVtOMY5GnOv0seMnvyOS3uHIbhmNpGqYPDNi6svw/GHnfklUiwjc2I54B7QsgMbmcLDY6G2G1k/xu/XSgfovNnsa6JxnfLYrIethYCOhdpuSq7Ju/gt7CHndH4i//7D0B1DbkUyJZbu8LFNHZwEG6uHx5Rc13OW9emTnm0wk8SVfPafYT96X7htFDN8VjaFutvj+xC4G2b+9Oh+6FGl8LgOk="
