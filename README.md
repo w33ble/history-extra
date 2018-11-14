@@ -4,6 +4,7 @@ Extra functionality for the [history](https://github.com/ReactTraining/history) 
 
 [![Build Status](https://travis-ci.org/w33ble/history-extra.svg?branch=master)](https://travis-ci.org/w33ble/history-extra)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/w33ble/history-extra/master/LICENSE)
+[![Coverage](https://img.shields.io/codecov/c/github/w33ble/history-extra.svg)](https://codecov.io/gh/w33ble/history-extra)
 [![npm](https://img.shields.io/npm/v/history-extra.svg)](https://www.npmjs.com/package/history-extra)
 [![Project Status](https://img.shields.io/badge/status-stable-brightgreen.svg)](https://nodejs.org/api/documentation.html#documentation_stability_index)
 

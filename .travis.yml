@@ -23,6 +23,9 @@ before_script:
   - yarn run lint
   - yarn run build
 
+after_success:
+  - yarn run coverage-report -e TRAVIS_NODE_VERSION
+
 env:
   global:
     - TRAVIS=1
