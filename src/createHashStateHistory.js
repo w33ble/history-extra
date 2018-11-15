@@ -1,7 +1,7 @@
 /* eslint no-use-before-define: 0 */
 import locationUtils from 'history/LocationUtils';
 import PathUtils from 'history/PathUtils';
-import createTransitionManager from 'history/createTransitionManager';
+import _createTransitionManager from 'history/createTransitionManager';
 import DOMUtils from 'history/DOMUtils';
 
 const { createLocation, locationsAreEqual } = locationUtils;
@@ -21,6 +21,11 @@ const {
   supportsGoWithoutReloadUsingHash,
   supportsHistory,
 } = DOMUtils;
+
+// goofy hack to handle cjs and esm differences in build
+const createTransitionManager = Object.hasOwnProperty.call(_createTransitionManager, 'default')
+  ? _createTransitionManager.default
+  : _createTransitionManager;
 
 function warning(condition, message) {
   if (condition) return;
