@@ -20,7 +20,7 @@ yarn add history history-extra
 
 The major version of `history-extra` should be compatible with the upstream `history` module with the same major version.
 
-So far, it's only been tested with `^4.7.0` and newer.
+So far, it's only been tested with `4.7.0` and newer.
 
 ## Methods
 
@@ -31,6 +31,28 @@ import { createHashStateHistory } from 'history-extra';
 ```
 
 Works the same way that [createHashHistory in history](https://github.com/ReactTraining/history/blob/master/README.md#usage) works, except that it supports state.
+
+## Development
+
+### Scripts
+
+There are several scripts available to check and test the code. The CI will run them too, but they're also helpful for running locally. All of these are launched with `npm run <script>` or `yarn run <script>`.
+
+script | description
+------ | -----------
+lint | Runs linter on the code to catch syntax and other issues.
+build | Runs the build, producing the output in `dist`.
+test | Runs the tests in a local browser (Chrome and Firefox).
+
+### Environment Variables
+
+There are some ENV args that make things nice for development.
+
+arg | description
+--- | -----------
+DEV | Boolean, useful for tests. Puts karma in watch mode and will re-run tests every time you save a change.
+TRAVIS | Boolean, used by the CI. Also useful for running your tests on Sauce Labs instead of just locally.
+KARMA_LAUNCHERS | Useful for controlling which launchers to use, as a comma-separated list. Only observed when TRAVIS is truthy. Available launchers are `SL_Explorer`, `SL_Chrome`, `SL_Firefox`, and `SL_Safari`.
 
 #### Thanks
 

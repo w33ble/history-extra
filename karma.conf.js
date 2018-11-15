@@ -31,7 +31,7 @@ module.exports = function karmaConfig(config) {
 
   const browsers = isTravis
     ? Object.keys(customLaunchers).filter(l => !launchers || launchers.split(',').includes(l))
-    : ['Chrome'];
+    : ['Firefox', 'Chrome'];
 
   const browserSettings = {
     browserConsoleLogOptions: {

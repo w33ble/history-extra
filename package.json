@@ -9,7 +9,6 @@
     "precommit": "lint-staged",
     "version": "npm run build && npm-auto-version",
     "build": "rollup -c rollup.build.js",
-    "start": "node .",
     "test": "karma start karma.conf.js",
     "coverage-report": "codecov"
   },
@@ -70,6 +69,7 @@
     "karma": "^2.0.5",
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage-istanbul-reporter": "^2.0.4",
+    "karma-firefox-launcher": "^1.1.0",
     "karma-rollup-preprocessor": "^6.1.0",
     "karma-sauce-launcher": "^1.2.0",
     "karma-tap": "^4.1.4",
