@@ -38,6 +38,7 @@ function invariant(condition, message) {
   throw new Error(`Invariant failed: ${message || ''}`);
 }
 
+const PopStateEvent = 'popstate';
 const HashChangeEvent = 'hashchange';
 
 const getHistoryState = () => {
@@ -217,42 +218,45 @@ const createHashStateHistory = (props = {}) => {
       const path = createPath(location);
       // eslint-disable-next-line no-shadow
       const encodedPath = encodePath(basename + path);
-      const hashChanged = getHashPath() !== encodedPath;
 
-      if (hashChanged) {
-        // We cannot tell if a hashchange was caused by a PUSH, so we'd
-        // rather setState here and ignore the hashchange. The caveat here
-        // is that other hash histories in the page will consider it a POP.
+      if (canUseHistory) {
+        // eslint-disable-next-line no-shadow
+        const { key, state } = location;
+        const href = createHref(location);
+        globalHistory.pushState({ key, state }, null, href);
+      } else {
+        // legacy fallback
         ignorePath = path;
 
-        if (canUseHistory) {
-          // eslint-disable-next-line no-shadow
-          const { key, state } = location;
-          const href = createHref(location);
-          globalHistory.pushState({ key, state }, null, href);
+        const hashChanged = getHashPath() !== encodedPath;
+
+        if (hashChanged) {
+          // We cannot tell if a hashchange was caused by a PUSH, so we'd
+          // rather setState here and ignore the hashchange. The caveat here
+          // is that other hash histories in the page will consider it a POP.
+          warning(
+            false,
+            'Hash history cannot PUSH the same path; a new entry will not be added to the history stack'
+          );
+
+          setState();
         } else {
           warning(
             state === undefined,
             'Browser history cannot push state in browsers that do not support HTML5 history, state is ignored'
           );
-          pushHashPath(encodedPath);
         }
 
-        const prevIndex = allPaths.lastIndexOf(createPath(history.location));
-        const nextPaths = allPaths.slice(0, prevIndex === -1 ? 0 : prevIndex + 1);
-
-        nextPaths.push(path);
-        allPaths = nextPaths;
-
-        setState({ action, location });
-      } else {
-        warning(
-          false,
-          'Hash history cannot PUSH the same path; a new entry will not be added to the history stack'
-        );
-
-        setState();
+        pushHashPath(encodedPath);
       }
+
+      const prevIndex = allPaths.lastIndexOf(createPath(history.location));
+      const nextPaths = allPaths.slice(0, prevIndex === -1 ? 0 : prevIndex + 1);
+
+      nextPaths.push(path);
+      allPaths = nextPaths;
+
+      setState({ action, location });
     });
   };
 
@@ -268,24 +272,27 @@ const createHashStateHistory = (props = {}) => {
       const path = createPath(location);
       // eslint-disable-next-line no-shadow
       const encodedPath = encodePath(basename + path);
-      const hashChanged = getHashPath() !== encodedPath;
 
-      if (hashChanged) {
-        // We cannot tell if a hashchange was caused by a REPLACE, so we'd
-        // rather setState here and ignore the hashchange. The caveat here
-        // is that other hash histories in the page will consider it a POP.
-        ignorePath = path;
+      if (canUseHistory) {
+        // eslint-disable-next-line no-shadow
+        const { key, state } = location;
+        const href = createHref(location);
+        globalHistory.replaceState({ key, state }, null, href);
+      } else {
+        // legacy fallback
 
-        if (canUseHistory) {
-          // eslint-disable-next-line no-shadow
-          const { key, state } = location;
-          const href = createHref(location);
-          globalHistory.replaceState({ key, state }, null, href);
-        } else {
-          warning(
-            state === undefined,
-            'Browser history cannot push state in browsers that do not support HTML5 history, state is ignored'
-          );
+        warning(
+          state === undefined,
+          'Browser history cannot push state in browsers that do not support HTML5 history, state is ignored'
+        );
+
+        const hashChanged = getHashPath() !== encodedPath;
+
+        if (hashChanged) {
+          // We cannot tell if a hashchange was caused by a REPLACE, so we'd
+          // rather setState here and ignore the hashchange. The caveat here
+          // is that other hash histories in the page will consider it a POP.
+          ignorePath = path;
           replaceHashPath(encodedPath);
         }
       }
@@ -312,11 +319,12 @@ const createHashStateHistory = (props = {}) => {
 
   const checkDOMListeners = delta => {
     listenerCount += delta;
+    const eventType = canUseHistory ? PopStateEvent : HashChangeEvent;
 
     if (listenerCount === 1) {
-      addEventListener(window, HashChangeEvent, handleHashChange);
+      addEventListener(window, eventType, handleHashChange);
     } else if (listenerCount === 0) {
-      removeEventListener(window, HashChangeEvent, handleHashChange);
+      removeEventListener(window, eventType, handleHashChange);
     }
   };
 
