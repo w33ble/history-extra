@@ -2,7 +2,7 @@ import test from 'tape-rollup';
 import getHistory from './lib/getHistory';
 import guid from './lib/guid';
 
-test('supports push route with state', t => {
+test('supports push route with state', { timeout: 3000 }, t => {
   t.plan(5);
   const PATH = guid();
   const STATE = { time: new Date().toString() };
@@ -16,7 +16,7 @@ test('supports push route with state', t => {
   t.deepEquals(window.history.state.state, STATE, 'state.state is set value');
 });
 
-test('supports push route without state', t => {
+test('supports push route without state', { timeout: 3000 }, t => {
   t.plan(3);
   const PATH = guid();
 
@@ -27,7 +27,7 @@ test('supports push route without state', t => {
   t.notOk(state, 'state is empty');
 });
 
-test('restores state on back button', t => {
+test('restores state on back button', { timeout: 3000 }, t => {
   t.plan(5);
 
   t.equals(typeof window.history.state.key, 'string', 'history state has key');
@@ -44,7 +44,7 @@ test('restores state on back button', t => {
   window.history.back();
 });
 
-// test('supports replace route with state', t => {
+// test('supports replace route with state', { timeout: 3000 }, t => {
 //   t.plan(5);
 //   const PATH = 'test2';
 //   const STATE = { time: new Date().toString() };

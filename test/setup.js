@@ -1,12 +1,12 @@
 import test from 'tape-rollup';
 import getHistory from './lib/getHistory';
 
-test('browser supports console.warn', t => {
+test('browser supports console.warn', { timeout: 3000 }, t => {
   t.plan(1);
   t.equals(typeof console.warn, 'function', 'console.warn is a function');
 });
 
-test('updates URL on load', t => {
+test('updates URL on load', { timeout: 3000 }, t => {
   t.plan(2);
 
   // confirm location has no hash

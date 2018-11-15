@@ -4,7 +4,7 @@ import guid from './lib/guid';
 
 let initialHref;
 
-test('create and capture initial url', t => {
+test('create and capture initial url', { timeout: 3000 }, t => {
   t.plan(1);
   initialHref = window.location.href;
   getHistory().push(`replace-${guid()}`);
@@ -12,7 +12,7 @@ test('create and capture initial url', t => {
   t.notEquals(currentHref, initialHref, 'href updated and captured');
 });
 
-test('supports replace route with state', t => {
+test('supports replace route with state', { timeout: 3000 }, t => {
   t.plan(3);
   const PATH = guid();
   const STATE = { time: new Date().toString() };
@@ -23,7 +23,7 @@ test('supports replace route with state', t => {
   t.deepEquals(window.history.state.state, STATE, 'state.state is set value');
 });
 
-test('supports replace route without state', t => {
+test('supports replace route without state', { timeout: 3000 }, t => {
   t.plan(3);
   const PATH = guid();
 
@@ -34,7 +34,7 @@ test('supports replace route without state', t => {
   t.notOk(state, 'state is empty');
 });
 
-test('restores state on back button', t => {
+test('restores state on back button', { timeout: 3000 }, t => {
   t.plan(4);
 
   t.equals(typeof window.history.state.key, 'string', 'history state has key');
