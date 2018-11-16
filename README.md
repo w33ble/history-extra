@@ -52,7 +52,7 @@ arg | description
 --- | -----------
 DEV | Boolean, useful for tests. Puts karma in watch mode and will re-run tests every time you save a change.
 TRAVIS | Boolean, used by the CI. Also useful for running your tests on Sauce Labs instead of just locally.
-KARMA_LAUNCHERS | Useful for controlling which launchers to use, as a comma-separated list. Only observed when TRAVIS is truthy. Available launchers are `SL_Explorer`, `SL_Chrome`, `SL_Firefox`, and `SL_Safari`.
+KARMA_LAUNCHERS | Useful for controlling which launchers to use, as a comma-separated list. Local options are `Chrome` and `Firefox`. If `TRAVIS` is truthy, options are `SL_Explorer`, `SL_Chrome`, `SL_Firefox`, and `SL_Safari`.
 
 #### Thanks
 

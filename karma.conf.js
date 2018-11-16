@@ -3,7 +3,11 @@ const rollupConfig = require('./rollup.karma.js');
 
 const isTravis = Boolean(process.env.TRAVIS);
 const isDev = Boolean(process.env.DEV);
-const launchers = process.env.KARMA_LAUNCHERS;
+
+const setLaunchers = list =>
+  list.filter(
+    l => !process.env.KARMA_LAUNCHERS || process.env.KARMA_LAUNCHERS.split(',').includes(l)
+  );
 
 module.exports = function karmaConfig(config) {
   const customLaunchers = {
@@ -30,8 +34,8 @@ module.exports = function karmaConfig(config) {
   };
 
   const browsers = isTravis
-    ? Object.keys(customLaunchers).filter(l => !launchers || launchers.split(',').includes(l))
-    : ['Firefox', 'Chrome'];
+    ? setLaunchers(Object.keys(customLaunchers))
+    : setLaunchers(['Firefox', 'Chrome']);
 
   const browserSettings = {
     browserConsoleLogOptions: {

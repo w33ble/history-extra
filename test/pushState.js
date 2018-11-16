@@ -1,6 +1,6 @@
 import test from 'tape-rollup';
 import getHistory from './lib/getHistory';
-import guid from './lib/guid';
+import { guid } from './lib/utils';
 
 test('supports push route with state', { timeout: 3000 }, t => {
   t.plan(5);
