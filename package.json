@@ -49,7 +49,7 @@
     "trailingComma": "es5"
   },
   "peerDependencies": {
-    "history": "^4.7.0"
+    "history": "^4.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.5",
