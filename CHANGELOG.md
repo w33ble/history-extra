@@ -1,5 +1,7 @@
 ### Changelog
 
+#### [v4.0.4](https://github.com/w33ble/history-extra/compare/v4.0.3...v4.0.4) (3 June 2019)
+
 #### [v4.0.3](https://github.com/w33ble/history-extra/compare/v4.0.2...v4.0.3) (3 June 2019)
 - fix: duplicate listeners [`d27402a`](https://github.com/w33ble/history-extra/commit/d27402aad94fd57fa34ef50d5ca1a1994af8a111)
 
