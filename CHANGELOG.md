@@ -1,5 +1,8 @@
 ### Changelog
 
+#### [v5.0.1](https://github.com/w33ble/history-extra/compare/v5.0.0...v5.0.1) (3 June 2019)
+- fix: update peerDependencies version [`8a2b100`](https://github.com/w33ble/history-extra/commit/8a2b100bcb973f91d86f59e00d7ec55874c1345b)
+
 ### [v5.0.0](https://github.com/w33ble/history-extra/compare/v4.0.2...v5.0.0) (3 June 2019)
 - fix: duplicate listeners [`cf7ca45`](https://github.com/w33ble/history-extra/commit/cf7ca45988e4f8069b405c8cff538e6fe55e79f2)
 
