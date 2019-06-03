@@ -321,7 +321,7 @@ const createHashStateHistory = (props = {}) => {
     listenerCount += delta;
     const eventType = canUseHistory ? PopStateEvent : HashChangeEvent;
 
-    if (listenerCount === 1) {
+    if (listenerCount === 1 && delta === 1) {
       addEventListener(window, eventType, handleHashChange);
     } else if (listenerCount === 0) {
       removeEventListener(window, eventType, handleHashChange);
