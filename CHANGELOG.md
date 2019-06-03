@@ -1,5 +1,8 @@
 ### Changelog
 
+#### [v4.0.3](https://github.com/w33ble/history-extra/compare/v4.0.2...v4.0.3) (3 June 2019)
+- fix: duplicate listeners [`d27402a`](https://github.com/w33ble/history-extra/commit/d27402aad94fd57fa34ef50d5ca1a1994af8a111)
+
 #### [v4.0.2](https://github.com/w33ble/history-extra/compare/v4.0.1...v4.0.2) (16 November 2018)
 - Fix: Allow push/replace on same path [`#1`](https://github.com/w33ble/history-extra/pull/1)
 - fix: support push and replace to same path [`658d4c7`](https://github.com/w33ble/history-extra/commit/658d4c7dad938b5aba32a95361e60aa5c3f8cdaa)
