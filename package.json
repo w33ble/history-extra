@@ -1,6 +1,6 @@
 {
   "name": "history-extra",
-  "version": "4.0.2",
+  "version": "5.0.0",
   "description": "Extra functionality for the history module",
   "main": "dist/createHashStateHistory.js",
   "module": "dist/createHashStateHistory.mjs",
