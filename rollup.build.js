@@ -22,12 +22,6 @@ module.exports = {
       dir: 'dist',
       file: 'createHashStateHistory.js',
       sourcemap: true,
-      globals: {
-        'history/LocationUtils': 'LocationUtils',
-        'history/PathUtils': 'PathUtils',
-        'history/createTransitionManager': 'createTransitionManager',
-        'history/DOMUtils': 'DOMUtils',
-      },
       banner,
     },
     {
@@ -38,7 +32,7 @@ module.exports = {
       banner,
     },
   ],
-  external: id => /history/.test(id),
+  external: ['history'],
   plugins: config.plugins.concat([
     babel({
       exclude: ['node_modules/**'],
