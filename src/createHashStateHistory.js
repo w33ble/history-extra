@@ -1,42 +1,21 @@
 /* eslint no-use-before-define: 0 */
-import locationUtils from 'history/LocationUtils';
-import PathUtils from 'history/PathUtils';
-import _createTransitionManager from 'history/createTransitionManager';
-import DOMUtils from 'history/DOMUtils';
-
-const { createLocation, locationsAreEqual } = locationUtils;
-const {
+import { createLocation, locationsAreEqual } from 'history';
+import { warning, invariant } from './utils/helpers';
+import createTransitionManager from './utils/createTransitionManager';
+import {
+  canUseDOM,
+  getConfirmation,
+  supportsGoWithoutReloadUsingHash,
+  supportsHistory,
+} from './utils/dom';
+import {
   addLeadingSlash,
   stripLeadingSlash,
   stripTrailingSlash,
   hasBasename,
   stripBasename,
   createPath,
-} = PathUtils;
-const {
-  canUseDOM,
-  addEventListener,
-  removeEventListener,
-  getConfirmation,
-  supportsGoWithoutReloadUsingHash,
-  supportsHistory,
-} = DOMUtils;
-
-// goofy hack to handle cjs and esm differences in build
-const createTransitionManager = Object.hasOwnProperty.call(_createTransitionManager, 'default')
-  ? _createTransitionManager.default
-  : _createTransitionManager;
-
-function warning(condition, message) {
-  if (condition) return;
-  // eslint-disable-next-line no-console
-  console.warn(message);
-}
-
-function invariant(condition, message) {
-  if (condition) return;
-  throw new Error(`Invariant failed: ${message || ''}`);
-}
+} from './utils/path';
 
 const PopStateEvent = 'popstate';
 const HashChangeEvent = 'hashchange';
@@ -322,9 +301,9 @@ const createHashStateHistory = (props = {}) => {
     const eventType = canUseHistory ? PopStateEvent : HashChangeEvent;
 
     if (listenerCount === 1) {
-      addEventListener(window, eventType, handleHashChange);
+      window.addEventListener(eventType, handleHashChange);
     } else if (listenerCount === 0) {
-      removeEventListener(window, eventType, handleHashChange);
+      window.removeEventListener(eventType, handleHashChange);
     }
   };
 

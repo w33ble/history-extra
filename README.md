@@ -18,9 +18,12 @@ yarn add history history-extra
 
 ## Versions
 
-The major version of `history-extra` should be compatible with the upstream `history` module with the same major version.
+The version of the `history` module you're using will determine which version of `history-extra` you should use. See the table below to find the version you need.
 
-So far, it's only been tested with `4.7.0` and newer.
+`history` | `history-extra`
+--- | ---
+4.7.x | 4.x
+4.8.0+ | 5.x
 
 ## Methods
 
@@ -30,7 +33,7 @@ So far, it's only been tested with `4.7.0` and newer.
 import { createHashStateHistory } from 'history-extra';
 ```
 
-Works the same way that [createHashHistory in history](https://github.com/ReactTraining/history/blob/master/README.md#usage) works, except that it supports state.
+Works the same way that [createHashHistory in history](https://github.com/ReactTraining/history/blob/master/README.md#usage) works, except that it supports browser history and pushState.
 
 ## Development
 
