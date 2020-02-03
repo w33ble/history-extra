@@ -84,5 +84,7 @@
     "rollup-plugin-node-resolve": "^3.4.0",
     "tape-rollup": "^4.6.4"
   },
-  "dependencies": {}
+  "dependencies": {
+    "core-js": "^2.6.11"
+  }
 }
